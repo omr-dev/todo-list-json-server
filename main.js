@@ -1,6 +1,8 @@
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
+import axios from "axios";
+
 
 document.querySelector("#app").innerHTML = `
 <div class="container-lg pt-4">
