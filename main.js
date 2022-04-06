@@ -31,6 +31,11 @@ async function addNewTask() {
   document.querySelector(".new-task-input").value = "";
   loadTasks();
 }
+async function deleteTask(e) {
+  const targetTaskId = e.target.getAttribute("data-task-id");
+  await axios.delete(dbUrl + "/" + targetTaskId);
+  loadTasks();
+}
 async function loadTasks() {
   const response = await axios.get(dbUrl);
   const tasks = response.data;
@@ -53,10 +58,16 @@ async function loadTasks() {
           </label>
 
         </div>
-        <div class="delete-button">
-          <i class="fa-solid fa-trash text-danger"></i>
+        <div class="delete-button" >
+          <i class="fa-solid fa-trash text-danger" data-task-id="${
+            task.id
+          }"></i>
         </div>
     </li>`;
+  });
+  const deleteButtons = document.querySelectorAll(".delete-button");
+  deleteButtons.forEach((deleteButton) => {
+    deleteButton.addEventListener("click", deleteTask);
   });
 }
 loadTasks();
