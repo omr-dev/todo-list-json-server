@@ -1,9 +1,14 @@
 {
-    "todos": [
-        {
-            "id": 1,
-            "detail": "write the code",
-            "isCompleted": true
-        }
-    ]
+  "todos": [
+    {
+      "detail": "elma ye",
+      "isCompleted": true,
+      "id": 2
+    },
+    {
+      "detail": "armut ye",
+      "isCompleted": true,
+      "id": 3
+    }
+  ]
 }

@@ -36,6 +36,19 @@ async function deleteTask(e) {
   await axios.delete(dbUrl + "/" + targetTaskId);
   loadTasks();
 }
+async function updateTaskStatus(e) {
+  const targetTaskId = e.target.getAttribute("data-task-id");
+  console.log(41, targetTaskId);
+  if (this.checked) {
+    console.log("checked task");
+    await axios.patch(dbUrl + "/" + targetTaskId, { isCompleted: true });
+  } else {
+    console.log("unchecked");
+    await axios.patch(dbUrl + "/" + targetTaskId, { isCompleted: false });
+  }
+  loadTasks();
+}
+
 async function loadTasks() {
   const response = await axios.get(dbUrl);
   const tasks = response.data;
@@ -48,9 +61,9 @@ async function loadTasks() {
       <div class="d-flex justify-content-between p-2">
         <div class="form-check">
           
-          <input class="form-check-input" type="checkbox" value="" ${
-            task.isCompleted ? "checked" : ""
-          }>
+          <input class="form-check-input" type="checkbox" data-task-id="${
+            task.id
+          }" value="" ${task.isCompleted ? "checked" : ""}>
           <label class="form-check-label" for="flexCheckChecked">
           ${task.isCompleted ? "<s>" : ""}${task.detail} ${
       task.isCompleted ? "</s>" : ""
@@ -68,6 +81,10 @@ async function loadTasks() {
   const deleteButtons = document.querySelectorAll(".delete-button");
   deleteButtons.forEach((deleteButton) => {
     deleteButton.addEventListener("click", deleteTask);
+  });
+  const checkboxes = document.querySelectorAll(".form-check-input");
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", updateTaskStatus);
   });
 }
 loadTasks();
