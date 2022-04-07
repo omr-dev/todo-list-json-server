@@ -9,6 +9,16 @@
       "detail": "armut ye",
       "isCompleted": true,
       "id": 3
+    },
+    {
+      "detail": "üzüm yika",
+      "isCompleted": false,
+      "id": 4
+    },
+    {
+      "detail": "bisiklet bin",
+      "isCompleted": false,
+      "id": 5
     }
   ]
 }

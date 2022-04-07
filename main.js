@@ -20,12 +20,13 @@ appElem.innerHTML = `
   </div>`;
 
 const addTaskElem = document.querySelector("#button-add-item");
+const newTaskDetails = document.querySelector(".new-task-input");
+newTaskDetails.addEventListener("keydown",(e)=>e.keyCode===13? addNewTask():"");
 addTaskElem.addEventListener("click", addNewTask);
 
 async function addNewTask() {
-  const newTaskDetails = document.querySelector(".new-task-input").value;
   await axios.post(dbUrl, {
-    detail: newTaskDetails,
+    detail: newTaskDetails.value,
     isCompleted: false,
   });
   document.querySelector(".new-task-input").value = "";
@@ -38,7 +39,7 @@ async function deleteTask(e) {
 }
 async function updateTaskStatus(e) {
   const targetTaskId = e.target.getAttribute("data-task-id");
-  console.log(41, targetTaskId);
+
   if (this.checked) {
     console.log("checked task");
     await axios.patch(dbUrl + "/" + targetTaskId, { isCompleted: true });
